@@ -16,11 +16,22 @@
   overflow: hidden;
   background-color: var(--bg);
 
-  /* sua imagem aqui */
+  /* sua imagem aqui 
   background-image: url("img/imagemteste1.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: right center; /* mantém o tatuador em evidência */
+  background-position: right center;  mantém o tatuador em evidência */
+
+  .hero__video{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    z-index: 0;
+    filter: brightness(.60) contrast(1.05);
+  }
 }
 
 /* header: Coloca logo e menu na mesma linha */
@@ -167,6 +178,7 @@
   position: relative;
   max-width: 680px;
   color: var(--text);
+  z-index: 3;
 }
 
 .hero__kicker{
