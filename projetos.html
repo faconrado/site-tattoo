@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title> Projetos Disponíveis - Site Alessandro </title>
+            <link rel="stylesheet" href="style.css" />
+        </head>
+
+<body>
+
+<section class="page page--dark">
+
+    <header class="site-header">
+        <div class="header-left">
+            <a class="logo-header" href="index.html">
+                <img src="img/logoteste2.png" alt="Logo do estúdio">
+            </a>
+
+            <nav class="site-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link is-active" href="projetos.html">Projetos Disponíveis</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page__content">
+        <h1>Projetos Disponíveis</h1>
+        <p>
+            Aqui estão alguns dos meus projetos disponíveis. Sinta-se à vontade para explorar e entrar em contato para mais informações!
+        </p>
+    </main>
+
+    <section class="gallery-block">
+        <h2 class="gallery-title">Projetos Disponíveis</h2>
+
+            <div class="gallery grid--featured" id="featured-gallery">
+                <a class="tile" href="cicatrizadasImg/1.png" data-full="cicatrizadasImg/1.png" data-alt="Projeto 1">
+                    <img src="cicatrizadasImg/1.png" alt="Projeto 1">
+                </a>
+
+                <a class="tile" href="cicatrizadasImg/2.png" data-full="cicatrizadasImg/2.png" data-alt="Projeto 2">
+                    <img src="cicatrizadasImg/2.png" alt="Projeto 2">
+                </a>
+
+ 
+            </div>
+    </section>
+</section>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox__backdrop" data-close="true"></div>
+
+  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Visualização de imagem">
+    <button class="lightbox__close" type="button" aria-label="Fechar (Esc)" data-close="true">✕</button>
+
+    <button class="lightbox__nav lightbox__prev" type="button" aria-label="Anterior (seta esquerda)">‹</button>
+
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+
+    <button class="lightbox__nav lightbox__next" type="button" aria-label="Próxima (seta direita)">›</button>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
