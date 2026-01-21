@@ -50,7 +50,7 @@
 .header-left{
   display: flex;
   align-items: center;  /* alinha verticalmente */
-  gap: 32px;            /* espaço entre logo e menu */ 
+  gap: 18px;            /* espaço entre logo e menu */ 
 }
 
 /* Logo */
