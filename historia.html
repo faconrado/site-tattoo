@@ -1,13 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Site Alessandro </title>
-    <link rel="stylesheet" href="style.css" />
-</head>
+    <html lang="pt-br"> 
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title> Site Alessandro </title>
+            <link rel="stylesheet" href="style.css" />
+        </head>
 
 <body>
-    <script src="script.js"></script>
+
+<section class="page page--dark">
+
+    <header class="site-header">
+        <div class="header-left">
+            <a class="logo-header" href="index.html">
+                <img src="img/logoteste2.png" alt="Logo do estúdio">
+            </a>
+
+            <nav class="site-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="site-nav" aria-label="Menu principal"</a>
+                
+
+                <div class="dropdown">
+                    <a class="nav-link dropdown__toggle" href="#" aria-haspopup="true">
+                    Veja Aqui <span class="chev">▾</span>
+                    </a>
+
+                    <div class="dropdown__menu"> 
+                    <a href="cicatrizadas.html">Cicatrizadas</a>
+                    <a href="projetos.html">Projetos</a>
+                    <a href="campeonatos.html">Campeonatos</a>
+                    <a href="historia.html">Minha história</a>
+                    </div>
+                </div>
+                <a class="nav-link is-active" href="historia.html">Minha história</a>
+            </nav>
+        </div>
+    </header>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
