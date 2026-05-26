@@ -345,7 +345,13 @@ img{ max-width: 100%; height: auto; display:block; }
 
 @media (max-height: 700px){
   .lightbox__img{
-    max-height: 60vh;
+    max-height: 60dvh;
+  }
+}
+
+@media (max-width: 767px){
+  .lightbox__figure{
+    flex-direction: column;
   }
 }
 
