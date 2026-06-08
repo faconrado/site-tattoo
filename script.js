@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdown = document.querySelector(".dropdown");
   const toggle = document.querySelector(".dropdown__toggle");
   const menu = document.querySelector(".dropdown__menu");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const siteNav = document.querySelector(".site-nav");
+
+  if (menuToggle && siteNav) {
+    menuToggle.addEventListener("click", () => {
+      siteNav.classList.toggle("is-active");
+      const active = siteNav.classList.contains("is-active");
+      menuToggle.setAttribute("aria-expanded", active);
+    });
+  }
 
   if (!dropdown || !toggle || !menu) return;
 
