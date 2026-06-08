@@ -1,0 +1,118 @@
+/* ==========================================
+   MENU HAMBÚRGUER & RESPONSIVIDADE MOBILE
+   ========================================== */
+
+/* Estilização do Botão Hambúrguer (Oculto no Desktop) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-color, #ffffff);
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-color, #ffffff);
+  position: absolute;
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.hamburger::before { top: -6px; }
+.hamburger::after { top: 6px; }
+
+/* Animação do Hambúrguer para o "X" */
+.menu-toggle[aria-expanded="true"] .hamburger {
+  background: transparent;
+}
+.menu-toggle[aria-expanded="true"] .hamburger::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] .hamburger::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Regras para Telas Mobile */
+@media (max-width: 768px) {
+  /* Exibe o botão do menu */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Transforma a navegação em um menu lateral responsivo */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Escondido para a direita */
+    width: 260px;
+    height: 100vh;
+    background: rgba(15, 15, 16, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 100px 32px;
+    gap: 24px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 99;
+  }
+
+  /* Classe ativada via JavaScript */
+  .site-nav.is-active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  /* Alinhamento do dropdown dentro do menu mobile */
+  .dropdown {
+    width: 100%;
+  }
+}
+
+/* Ajuste da Galeria: Duas Colunas Menores no Mobile */
+@media (max-width: 520px) {
+  .grid--featured {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Força exatamente duas colunas */
+    gap: 12px !important;
+    grid-auto-rows: auto !important;
+  }
+
+  /* Reseta os spans para as imagens não quebrarem o layout de 2 colunas */
+  .tile, 
+  .tile.is-wide, 
+  .tile.is-tall {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    height: 180px !important; /* Mantém uma altura padrão harmônica para as miniaturas */
+  }
+
+  .tile img, 
+  .tile video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a arte da tatuagem não fique esticada */
+  }
+}
