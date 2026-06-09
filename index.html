@@ -6,6 +6,7 @@
     <title> Site Alessandro </title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="style-humburguer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
 <body>
@@ -54,7 +55,7 @@
     </div>
   </header>
 
-  <div class="hero__content">
+  <div class="hero__content" data-aos="fade-up">
     <p class="hero__kicker">Alessandro Moura • Tattoo Studio</p>
 
     <h1 class="hero__title">
@@ -78,6 +79,17 @@
     </div>
   </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- 2º Inicializa a AOS com as configurações ideais -->
+    <script>
+      AOS.init({
+        duration: 800,     /* Duração da animação em milissegundos (0.8 segundos) */
+        once: true,        /* Anima apenas uma vez ao descer a tela (evita repetições bobas) */
+        offset: 100        /* Dispara a animação 100px antes do item surgir na tela */
+      });
+    </script>
 
 <script src="script.js"></script>
 </body>

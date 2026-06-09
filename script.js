@@ -1,67 +1,67 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
-  const dropdown = document.querySelector(".dropdown");
-  const toggle = document.querySelector(".dropdown__toggle");
-  const menu = document.querySelector(".dropdown__menu");
+  // --- CONTROLE DO MENU HAMBÚRGUER MOBILE ---
   const menuToggle = document.querySelector(".menu-toggle");
   const siteNav = document.querySelector(".site-nav");
 
   if (menuToggle && siteNav) {
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", !isExpanded);
       siteNav.classList.toggle("is-active");
-      const active = siteNav.classList.contains("is-active");
-      menuToggle.setAttribute("aria-expanded", active);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!siteNav.contains(e.target) && !menuToggle.contains(e.target)) {
+        menuToggle.setAttribute("aria-expanded", "false");
+        siteNav.classList.remove("is-active");
+      }
     });
   }
 
-  if (!dropdown || !toggle || !menu) return;
+  // --- CONTROLE DO DROPDOWN ---
+  const dropdown = document.querySelector(".dropdown");
+  const toggle = document.querySelector(".dropdown__toggle");
+  const menu = document.querySelector(".dropdown__menu");
 
-  // Acessibilidade mínima
-  toggle.setAttribute("aria-expanded", "false");
-
-  function openMenu() {
-    dropdown.classList.add("is-open");
-    toggle.setAttribute("aria-expanded", "true");
-  }
-
-  function closeMenu() {
-    dropdown.classList.remove("is-open");
+  if (dropdown && toggle && menu) {
     toggle.setAttribute("aria-expanded", "false");
+
+    function openMenu() {
+      dropdown.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      dropdown.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.contains("is-open") ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) closeMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    menu.addEventListener("click", (e) => {
+      if (e.target.closest("a")) closeMenu();
+    });
   }
-
-  function isOpen() {
-    return dropdown.classList.contains("is-open");
-  }
-
-  // Toggle no clique
-  toggle.addEventListener("click", (e) => {
-    e.preventDefault(); // evita o href="#"
-    isOpen() ? closeMenu() : openMenu();
-  });
-
-  // Fecha ao clicar fora
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) closeMenu();
-  });
-
-  // Fecha no ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-  });
-
-  // Fecha ao clicar em um item (opcional, mas bom)
-  menu.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (link) closeMenu();
-  });
 });
 
+// --- EFEITO SCROLL NO HEADER ---
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
   if (!header) return;
 
   function onScroll() {
-    // 20px é um ponto bom, pode ajustar
     if (window.scrollY > 20) header.classList.add("is-scrolled");
     else header.classList.remove("is-scrolled");
   }
@@ -70,8 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, { passive: true });
 });
 
-/* ===============================Cicatrizadas============================================== */
-
+// --- LIGHTBOX DA GALERIA ---
 document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.querySelector("#featured-gallery");
   const lightbox = document.querySelector("#lightbox");
@@ -82,9 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!gallery || !lightbox || !imgEl) return;
 
-  // 1) lista “linear” de itens clicáveis (ordem do DOM)
   const items = Array.from(gallery.querySelectorAll(".tile"));
-
   let currentIndex = -1;
   let lastFocus = null;
 
@@ -104,14 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openLightbox(index, focusFrom) {
     lastFocus = focusFrom || document.activeElement;
-
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("lb-open");
-
     setImage(index);
 
-    // move foco para o modal (acessibilidade)
     const closeBtn = lightbox.querySelector("[data-close]");
     closeBtn?.focus();
   }
@@ -120,13 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lb-open");
-
-    // volta foco para quem abriu
-    if (lastFocus && typeof lastFocus.focus === "function") {
-      lastFocus.focus();
-    }
-
-    // limpa src pra não manter download/decodificação ativa
     imgEl.src = "";
     imgEl.alt = "";
     if (capEl) capEl.textContent = "";
@@ -143,35 +130,28 @@ document.addEventListener("DOMContentLoaded", () => {
     setImage((currentIndex - 1 + items.length) % items.length);
   }
 
-  // 2) Clique nos tiles abre o modal
   gallery.addEventListener("click", (e) => {
     const tile = e.target.closest(".tile");
     if (!tile) return;
 
-    e.preventDefault(); // evita abrir a imagem como página
+    e.preventDefault();
     const index = items.indexOf(tile);
     if (index >= 0) openLightbox(index, tile);
   });
 
-  // 3) Botões
   btnNext?.addEventListener("click", next);
   btnPrev?.addEventListener("click", prev);
 
-  // 4) Fechar: clique no backdrop ou no X
   lightbox.addEventListener("click", (e) => {
-    const close = e.target.closest("[data-close]");
-    if (close) closeLightbox();
+    if (e.target.closest("[data-close]") || e.target.classList.contains("lightbox__backdrop")) {
+      closeLightbox();
+    }
   });
 
-  // 5) Teclado: ESC / setas
   document.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("is-open")) return;
-
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
   });
 });
-
-
-/* ============================================================================= */
