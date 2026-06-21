@@ -1,4 +1,5 @@
   // --- CONTROLE DO MENU HAMBÚRGUER MOBILE ---
+  document.addEventListener("click", (e) => {
   const menuToggle = document.querySelector(".menu-toggle");
   const siteNav = document.querySelector(".site-nav");
 
@@ -11,6 +12,8 @@
       menuToggle.setAttribute("aria-expanded", !isExpanded);
       siteNav.classList.toggle("is-active");
     });
+  }
+})
 
     // Fecha o menu automaticamente se o usuário clicar em qualquer lugar fora dele
     document.addEventListener("click", (e) => {
@@ -19,4 +22,4 @@
         siteNav.classList.remove("is-active");
       }
     });
-  }
+  

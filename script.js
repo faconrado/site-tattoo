@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  
   // --- CONTROLE DO DROPDOWN ---
   const dropdown = document.querySelector(".dropdown");
   const toggle = document.querySelector(".dropdown__toggle");
