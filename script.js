@@ -1,92 +1,93 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // --- CONTROLE DO MENU HAMBÚRGUER MOBILE ---
-  const menuToggle = document.querySelector(".menu-toggle");
-  const siteNav = document.querySelector(".site-nav");
-
-  if (menuToggle && siteNav) {
-    menuToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", !isExpanded);
-      siteNav.classList.toggle("is-active");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!siteNav.contains(e.target) && !menuToggle.contains(e.target)) {
-        menuToggle.setAttribute("aria-expanded", "false");
-        siteNav.classList.remove("is-active");
-      }
-    });
+const onReady = (callback) => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", callback);
+    return;
   }
 
-  
-  // --- CONTROLE DO DROPDOWN ---
-  const dropdown = document.querySelector(".dropdown");
-  const toggle = document.querySelector(".dropdown__toggle");
-  const menu = document.querySelector(".dropdown__menu");
+  callback();
+};
 
-  if (dropdown && toggle && menu) {
-    toggle.setAttribute("aria-expanded", "false");
+function initAOS() {
+  if (!window.AOS) return;
 
-    function openMenu() {
-      dropdown.classList.add("is-open");
-      toggle.setAttribute("aria-expanded", "true");
-    }
+  window.AOS.init({
+    duration: 800,
+    once: true,
+    offset: 100,
+  });
+}
 
-    function closeMenu() {
-      dropdown.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-
-    toggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      dropdown.classList.contains("is-open") ? closeMenu() : openMenu();
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!dropdown.contains(e.target)) closeMenu();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    menu.addEventListener("click", (e) => {
-      if (e.target.closest("a")) closeMenu();
-    });
-  }
-});
-
-// --- EFEITO SCROLL NO HEADER ---
-document.addEventListener("DOMContentLoaded", () => {
+function initHeaderScroll() {
   const header = document.querySelector(".site-header");
   if (!header) return;
 
-  function onScroll() {
-    if (window.scrollY > 20) header.classList.add("is-scrolled");
-    else header.classList.remove("is-scrolled");
-  }
+  const updateHeader = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 20);
+  };
 
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-});
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+}
 
-// --- LIGHTBOX DA GALERIA ---
-document.addEventListener("DOMContentLoaded", () => {
-  const gallery = document.querySelector("#featured-gallery");
+function initMobileMenu() {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const siteNav = document.querySelector(".site-nav");
+  if (!menuToggle || !siteNav) return;
+
+  const setMenuOpen = (isOpen) => {
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    siteNav.classList.toggle("is-active", isOpen);
+    document.body.classList.toggle("nav-open", isOpen);
+  };
+
+  menuToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    setMenuOpen(!isOpen);
+  });
+
+  siteNav.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMenuOpen(false);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!siteNav.contains(event.target) && !menuToggle.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
+  });
+}
+
+function initGalleryLightbox() {
+  const galleries = document.querySelectorAll(".gallery");
   const lightbox = document.querySelector("#lightbox");
   const imgEl = document.querySelector(".lightbox__img");
   const capEl = document.querySelector(".lightbox__caption");
   const btnPrev = document.querySelector(".lightbox__prev");
   const btnNext = document.querySelector(".lightbox__next");
 
-  if (!gallery || !lightbox || !imgEl) return;
+  if (!galleries.length || !lightbox || !imgEl) return;
 
-  const items = Array.from(gallery.querySelectorAll(".tile"));
+  let activeGallery = null;
   let currentIndex = -1;
   let lastFocus = null;
 
-  function setImage(index) {
+  const getItems = () => {
+    if (!activeGallery) return [];
+    return Array.from(activeGallery.querySelectorAll(".tile"));
+  };
+
+  const updateNavigation = () => {
+    const hasMultipleItems = getItems().length > 1;
+    btnPrev?.toggleAttribute("disabled", !hasMultipleItems);
+    btnNext?.toggleAttribute("disabled", !hasMultipleItems);
+  };
+
+  const setImage = (index) => {
+    const items = getItems();
     const tile = items[index];
     if (!tile) return;
 
@@ -98,61 +99,83 @@ document.addEventListener("DOMContentLoaded", () => {
     if (capEl) capEl.textContent = alt;
 
     currentIndex = index;
-  }
+    updateNavigation();
+  };
 
-  function openLightbox(index, focusFrom) {
+  const openLightbox = (gallery, index, focusFrom) => {
+    activeGallery = gallery;
     lastFocus = focusFrom || document.activeElement;
+
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("lb-open");
+
     setImage(index);
+    lightbox.querySelector("[data-close]")?.focus();
+  };
 
-    const closeBtn = lightbox.querySelector("[data-close]");
-    closeBtn?.focus();
-  }
-
-  function closeLightbox() {
+  const closeLightbox = () => {
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lb-open");
-    imgEl.src = "";
+
+    imgEl.removeAttribute("src");
     imgEl.alt = "";
     if (capEl) capEl.textContent = "";
+
     currentIndex = -1;
-  }
+    activeGallery = null;
 
-  function next() {
-    if (currentIndex < 0) return;
+    if (lastFocus instanceof HTMLElement) lastFocus.focus();
+    lastFocus = null;
+  };
+
+  const showNext = () => {
+    const items = getItems();
+    if (!items.length || currentIndex < 0) return;
     setImage((currentIndex + 1) % items.length);
-  }
+  };
 
-  function prev() {
-    if (currentIndex < 0) return;
+  const showPrevious = () => {
+    const items = getItems();
+    if (!items.length || currentIndex < 0) return;
     setImage((currentIndex - 1 + items.length) % items.length);
-  }
+  };
 
-  gallery.addEventListener("click", (e) => {
-    const tile = e.target.closest(".tile");
-    if (!tile) return;
+  galleries.forEach((gallery) => {
+    gallery.addEventListener("click", (event) => {
+      const tile = event.target.closest(".tile");
+      if (!tile || !gallery.contains(tile)) return;
 
-    e.preventDefault();
-    const index = items.indexOf(tile);
-    if (index >= 0) openLightbox(index, tile);
+      event.preventDefault();
+
+      activeGallery = gallery;
+      const index = getItems().indexOf(tile);
+      if (index >= 0) openLightbox(gallery, index, tile);
+    });
   });
 
-  btnNext?.addEventListener("click", next);
-  btnPrev?.addEventListener("click", prev);
+  btnNext?.addEventListener("click", showNext);
+  btnPrev?.addEventListener("click", showPrevious);
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target.closest("[data-close]") || e.target.classList.contains("lightbox__backdrop")) {
+  lightbox.addEventListener("click", (event) => {
+    if (event.target.closest("[data-close]") || event.target.classList.contains("lightbox__backdrop")) {
       closeLightbox();
     }
   });
 
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", (event) => {
     if (!lightbox.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
+
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowRight") showNext();
+    if (event.key === "ArrowLeft") showPrevious();
   });
+}
+
+onReady(() => {
+  initAOS();
+  initHeaderScroll();
+  initMobileMenu();
+  initGalleryLightbox();
 });

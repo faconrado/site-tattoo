@@ -1,60 +1,56 @@
 <!DOCTYPE html>
-    <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title> Projetos Disponíveis - Site Alessandro </title>
-            <link rel="stylesheet" href="style.css" />
-            <link rel="stylesheet" href="style-humburguer.css" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-
-        </head>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projetos disponíveis para tatuagem do Alessandro Moura Tattoo Studio." />
+  <title>Projetos Disponíveis - Alessandro Moura Tattoo Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+</head>
 
 <body>
-
 <section class="page page--dark">
+  <header class="site-header">
+    <div class="header-left">
+      <a class="logo-header" href="index.html" aria-label="Alessandro Moura Tattoo Studio">
+        <img src="img/logoteste2.png" alt="Logo do estúdio Alessandro Moura">
+      </a>
 
-    <header class="site-header">
-        <div class="header-left">
-            <a class="logo-header" href="index.html">
-                <img src="img/logoteste2.png" alt="Logo do estúdio">
-            </a>
-                <button class="menu-toggle" aria-label="Abrir menu" aria-haspopup="true" aria-controls="site-nav" aria-expanded="false">
-                    <span class="hamburger"></span>
-                </button>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-haspopup="true" aria-controls="site-nav" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
 
-                <nav class="site-nav">  
-                    <a href="index.html" class="nav-link">Início</a>
-                    <a href="cicatrizadas.html" class="nav-link">Cicatrizadas</a>
-                    <a href="projetos.html" class="nav-link">Projetos</a>
-                    <a href="campeonatos.html" class="nav-link">Campeonatos</a>
-                    <a href="historia.html" class="nav-link">Minha história</a>
-                </nav>
-        </div>
-    </header>
+      <nav class="site-nav" id="site-nav" aria-label="Menu principal">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="cicatrizadas.html" class="nav-link">Cicatrizadas</a>
+        <a href="projetos.html" class="nav-link" aria-current="page">Projetos</a>
+        <a href="campeonatos.html" class="nav-link">Campeonatos</a>
+        <a href="historia.html" class="nav-link">Minha história</a>
+      </nav>
+    </div>
+  </header>
 
-    <main class="page__content">
-        <h1>Projetos Disponíveis</h1>
-        <p>
-            Aqui estão alguns dos meus projetos disponíveis. Sinta-se à vontade para explorar e entrar em contato para mais informações!
-        </p>
-    </main>
+  <main class="page__content" data-aos="fade-up">
+    <h1>Projetos Disponíveis</h1>
+    <p>
+      Aqui estão alguns dos meus projetos disponíveis. Sinta-se à vontade para explorar e entrar em contato para mais informações!
+    </p>
+  </main>
 
-    <section class="gallery-block">
-        <h2 class="gallery-title">Projetos Disponíveis</h2>
+  <section class="gallery-block" data-aos="fade-up">
+    <h2 class="gallery-title">Projetos Disponíveis</h2>
 
-            <div class="gallery grid--featured" id="featured-gallery">
-                <a class="tile" href="cicatrizadasImg/1.png" data-full="cicatrizadasImg/1.png" data-alt="Projeto 1">
-                    <img src="cicatrizadasImg/1.png" alt="Projeto 1">
-                </a>
+    <div class="gallery grid--featured" id="featured-gallery">
+      <a class="tile" href="cicatrizadasImg/1.png" data-full="cicatrizadasImg/1.png" data-alt="Projeto 1">
+        <img src="cicatrizadasImg/1.png" alt="Projeto 1" loading="lazy" decoding="async">
+      </a>
 
-                <a class="tile" href="cicatrizadasImg/2.png" data-full="cicatrizadasImg/2.png" data-alt="Projeto 2">
-                    <img src="cicatrizadasImg/2.png" alt="Projeto 2">
-                </a>
-
- 
-            </div>
-    </section>
+      <a class="tile" href="cicatrizadasImg/2.png" data-full="cicatrizadasImg/2.png" data-alt="Projeto 2">
+        <img src="cicatrizadasImg/2.png" alt="Projeto 2" loading="lazy" decoding="async">
+      </a>
+    </div>
+  </section>
 </section>
 
 <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -62,11 +58,10 @@
 
   <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Visualização de imagem">
     <button class="lightbox__close" type="button" aria-label="Fechar (Esc)" data-close="true">✕</button>
-
     <button class="lightbox__nav lightbox__prev" type="button" aria-label="Anterior (seta esquerda)">‹</button>
 
     <figure class="lightbox__figure">
-      <img class="lightbox__img" src="" alt="">
+      <img class="lightbox__img" alt="">
       <figcaption class="lightbox__caption"></figcaption>
     </figure>
 
@@ -75,17 +70,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    
-    <!-- 2º Inicializa a AOS com as configurações ideais -->
-    <script>
-      AOS.init({
-        duration: 800,     /* Duração da animação em milissegundos (0.8 segundos) */
-        once: true,        /* Anima apenas uma vez ao descer a tela (evita repetições bobas) */
-        offset: 100        /* Dispara a animação 100px antes do item surgir na tela */
-      });
-    </script>
-
-<script src="script-humburguer.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

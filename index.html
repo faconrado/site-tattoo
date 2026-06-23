@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Site Alessandro </title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style-humburguer.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alessandro Moura Tattoo Studio. Tatuagens autorais com foco em acabamento, higiene e estilo." />
+  <title>Alessandro Moura Tattoo Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
 <body>
 <section class="hero hero--dark" id="home">
-
-  <!-- Vídeo de fundo -->
-   <video class="hero__video" autoplay muted loop playsinline>
+  <video class="hero__video" autoplay muted loop playsinline aria-hidden="true">
     <source src="video/video1.mp4" type="video/mp4" />
     Seu navegador não suporta o elemento de vídeo.
-   </video>
+  </video>
 
   <header class="site-header">
-
     <div class="header-left">
-      <a class="logo-header" href="#">
-        <img src="img/logoteste2.png" alt="Logo do estúdio">
+      <a class="logo-header" href="index.html" aria-label="Alessandro Moura Tattoo Studio">
+        <img src="img/logoteste2.png" alt="Logo do estúdio Alessandro Moura">
       </a>
 
-      <button class="menu-toggle" aria-label="Abrir menu" aria-haspopup="true" aria-controls="site-nav" aria-expanded="false">
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-haspopup="true" aria-controls="site-nav" aria-expanded="false">
         <span class="hamburger"></span>
       </button>
 
-      <nav class="site-nav">  
-        <a href="index.html" class="nav-link">Início</a>
+      <nav class="site-nav" id="site-nav" aria-label="Menu principal">
+        <a href="index.html" class="nav-link" aria-current="page">Início</a>
         <a href="cicatrizadas.html" class="nav-link">Cicatrizadas</a>
         <a href="projetos.html" class="nav-link">Projetos</a>
         <a href="campeonatos.html" class="nav-link">Campeonatos</a>
         <a href="historia.html" class="nav-link">Minha história</a>
       </nav>
-
-
     </div>
-    
   </header>
 
   <div class="hero__content" data-aos="fade-up">
@@ -56,26 +50,15 @@
 
     <div class="hero__actions">
       <a class="btn btn--primary" href="#agenda">Agendar no WhatsApp</a>
-      <!-- <a class="btn btn--ghost" href="#portfolio">Ver portfólio</a> -->
     </div>
 
     <div class="hero__meta">
-      <a class="meta-pill" href="https://www.google.com/maps/dir//Studio,+Av.+Ruy+Rodriguez,+4640+-+3+-+Jardim+Mercedes,+Campinas+-+SP,+13056-460/@-22.9698242,-47.1436305,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94c8b7f810feee23:0xfefc17d8eb75216f!2m2!1d-47.1433149!2d-22.9674851?authuser=0&entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D">📍 Sua cidade</a>
+      <a class="meta-pill" href="https://www.google.com/maps/dir//Studio,+Av.+Ruy+Rodriguez,+4640+-+3+-+Jardim+Mercedes,+Campinas+-+SP,+13056-460/@-22.9698242,-47.1436305,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94c8b7f810feee23:0xfefc17d8eb75216f!2m2!1d-47.1433149!2d-22.9674851?authuser=0&entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">📍 Campinas, SP</a>
     </div>
   </div>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    
-    <!-- 2º Inicializa a AOS com as configurações ideais -->
-    <script>
-      AOS.init({
-        duration: 800,     /* Duração da animação em milissegundos (0.8 segundos) */
-        once: true,        /* Anima apenas uma vez ao descer a tela (evita repetições bobas) */
-        offset: 100        /* Dispara a animação 100px antes do item surgir na tela */
-      });
-    </script>
-
 <script src="script.js"></script>
 </body>
 </html>
