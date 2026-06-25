@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Área administrativa do site Alessandro Moura Tattoo.">
+
+  <title>Login | Alessandro Moura Tattoo</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body class="login-page">
+  <main class="login-main">
+    <section class="login-panel" aria-labelledby="login-title">
+      <a class="login-brand" href="index.html" aria-label="Voltar para a página inicial">
+        <img src="img/logoteste2.png" alt="Alessandro Moura Tattoo">
+      </a>
+
+      <div class="login-heading">
+        <h1 id="login-title">Área administrativa</h1>
+        <p>Entre para gerenciar o conteúdo do site.</p>
+      </div>
+
+      <form id="login-form" class="login-form" novalidate>
+        <div class="form-field">
+          <label for="username">Usuário</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="password">Senha</label>
+
+          <div class="password-field">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              id="toggle-password"
+              class="password-toggle"
+              type="button"
+              aria-label="Mostrar senha"
+              aria-pressed="false"
+            >
+              Mostrar
+            </button>
+          </div>
+        </div>
+
+        <p id="login-message" class="login-message" role="alert" aria-live="polite"></p>
+
+        <button id="login-submit" class="login-submit" type="submit">
+          Entrar
+        </button>
+      </form>
+
+      <a class="login-back" href="index.html">Voltar ao site</a>
+    </section>
+  </main>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>

@@ -22,10 +22,6 @@
         <img src="img/logoteste2.png" alt="Logo do estúdio Alessandro Moura">
       </a>
 
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-haspopup="true" aria-controls="site-nav" aria-expanded="false">
-        <span class="hamburger"></span>
-      </button>
-
       <nav class="site-nav" id="site-nav" aria-label="Menu principal">
         <a href="index.html" class="nav-link" aria-current="page">Início</a>
         <a href="cicatrizadas.html" class="nav-link">Cicatrizadas</a>
@@ -33,6 +29,40 @@
         <a href="campeonatos.html" class="nav-link">Campeonatos</a>
         <a href="historia.html" class="nav-link">Minha história</a>
       </nav>
+
+      <div class="header-tools">
+        <a
+          id="auth-login"
+          class="auth-control"
+          href="login.html"
+          aria-label="Entrar na área administrativa"
+          title="Entrar"
+        >
+          <i data-lucide="user-round" aria-hidden="true"></i>
+        </a>
+
+        <button
+          id="auth-logout"
+          class="auth-control"
+          type="button"
+          aria-label="Sair da área administrativa"
+          title="Sair"
+          hidden
+        >
+          <i data-lucide="log-out" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-haspopup="true"
+          aria-controls="site-nav"
+          aria-expanded="false"
+        >
+          <span class="hamburger"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -60,5 +90,15 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="script.js"></script>
+
+<script src="https://unpkg.com/lucide@1.21.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="script.js"></script>
+<script type="module" src="auth-ui.js"></script>
+
+<script>
+  lucide.createIcons();
+</script>
+
 </body>
 </html>
