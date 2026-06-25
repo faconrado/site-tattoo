@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Premiações e campeonatos de tatuagem do Alessandro Moura Tattoo Studio." />
   <title>Campeonatos - Alessandro Moura Tattoo Studio</title>
+  <link rel="icon" type="image/png" href="img/logoteste2.png">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
@@ -54,17 +55,40 @@
     </main>
 
     <section class="gallery-block" data-aos="fade-up">
-      <h2 class="gallery-title">Campeonatos</h2>
+      <h2 class="gallery-title">Categoria Preto e Cinza</h2>
 
-      <div class="gallery grid--featured" id="featured-gallery">
-        <a class="tile" href="cicatrizadasImg/1.png" data-full="cicatrizadasImg/1.png" data-alt="Projeto 1">
-          <img src="cicatrizadasImg/1.png" alt="Projeto 1" loading="lazy" decoding="async">
-        </a>
+      <section class="admin-gallery-panel" aria-labelledby="upload-title">
+        <div class="admin-gallery-heading">
+          <div>
+            <h3 id="upload-title">Adicionar fotografia</h3>
+            <p>A imagem será otimizada antes do envio.</p>
+          </div>
+        </div>
 
-        <a class="tile" href="cicatrizadasImg/2.png" data-full="cicatrizadasImg/2.png" data-alt="Projeto 2">
-          <img src="cicatrizadasImg/2.png" alt="Projeto 2" loading="lazy" decoding="async">
-        </a>
+        <form id="photo-upload-form" class="photo-upload-form">
+          <div class="upload-field">
+            <label for="photo-file">Fotografia</label>
+            <input id="photo-file" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
+          </div>
+
+          <div class="upload-field">
+            <label for="photo-title">Descrição</label>
+            <input id="photo-title" name="title" type="text" minlength="3" maxlength="120"
+              placeholder="Ex.: Tatuagem realista cicatrizada" required>
+          </div>
+
+          <p id="upload-message" class="upload-message" role="status" aria-live="polite"></p>
+
+          <button id="upload-submit" class="upload-submit" type="submit">
+            <i data-lucide="upload" aria-hidden="true"></i>
+            <span>Enviar fotografia</span>
+          </button>
+        </form>
+      </section>
+
+      <div class="gallery grid--featured" id="featured-gallery" data-gallery-page="campeonatos">
       </div>
+
     </section>
   </section>
 
@@ -84,12 +108,11 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="script.js"></script>
   <script src="https://unpkg.com/lucide@1.21.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
   <script type="module" src="auth-ui.js"></script>
+  <script type="module" src="gallery-manager.js"></script>
 
   <script>
     lucide.createIcons();
